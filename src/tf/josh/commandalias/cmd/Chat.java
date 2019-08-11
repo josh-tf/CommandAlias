@@ -11,7 +11,6 @@ public class Chat
     public Chat() {
         super("c", "chat", "/c", Arrays.asList(new String[]{""}));
     }
-
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (sender instanceof Player) {
             StringBuilder builder = new StringBuilder();
