@@ -6,27 +6,56 @@
 # Remember to use spaces and not tabs (yaml is picky)
 #
 # Available Placeholders
+# Note placeholders can only be used in player only commands
 #
 # {player} - the players name 
 # {world} - the world the command was ran from
+#
+#
+# Config Explanation
+# usage:          the command, for example /starter
+# description:    a brief description (shown in the alias list)
+# cmdtype:        who can run the command (player/console/both)
+# permission:     the permission node to check for
+# aliases:        any other alias for this command
+# playercmd:      a list of commands to run as the calling player (for player type only)
+# consolecmd:     a list of commands to run as the calling console (for console/both types only)
 #
 
 cmds:
   starter:
     usage: /starter
-    description: Gives the player starter items and charges them $10
-    ingame: true # if false then this can only be run via console
-    permission: "commandalias.starter" # you can put anything here
+    description: Gives the player starter items
+    cmdtype: player
+    permission: "commandalias.starter"
     aliases: 
     - starterkit
-    playercmd: 
-    - warp starter # warp to the starter area
-    - c I just claimed my starter kit # c is the bukkit command for chat 
+    playercmd:
+    - c I just claimed a starter kit
     consolecmd:
-     - eco take 10 {player} 1 # take $10 from the players balance
-     - item {player} ssword 1 # give 1x stone sword
-     - item {player} spaxe 1 # give 1x stone pickaxe
-     - item {player} sshovel 1 # give 1x stone shovel
-     - item {player} saxe 1 # give 1x stone axe
-     - item {player} shoe 1 # give 1x stone hoe
+     - give {player} minecraft:stone_sword 1
+     - give {player} minecraft:stone_pickaxe 1
+     - give {player} minecraft:stone_shovel 1
+     - give {player} minecraft:stone_axe 1
+     - give {player} minecraft:stone_hoe 1
+  setday:
+    usage: /setday
+    description: Runs an example command from the console triggered by console or player
+    cmdtype: both
+    permission: "commandalias.makesun"
+    aliases:
+    playercmd:
+    consolecmd:
+      - say Making the weather sunny!
+      - weather clear
+      - time set day
+  democonsole:
+    usage: /democonsole
+    description: Runs an example command triggered by the console console
+    cmdtype: console
+    permission: "commandalias.democonsole"
+    aliases:
+    playercmd:
+    consolecmd:
+      - say Hello World from CONSOLE!
  

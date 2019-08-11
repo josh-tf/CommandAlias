@@ -12,14 +12,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 public class Commands extends BukkitCommand {
-    private boolean playerCommand = false;
 
+    private String cmdtype = "";
     private String permission = "";
     private Plugin plugin;
 
-    public Commands(String name, String usageMessage, List<String> aliases, String description,  boolean playerCommand, String permission, Plugin plugin) {
+    public Commands(String name, String usageMessage, List<String> aliases, String description,  String cmdtype, String permission, Plugin plugin) {
         super(name, description, usageMessage, aliases);
-        this.playerCommand = playerCommand;
+        this.cmdtype = cmdtype;
         this.permission = permission;
         this.plugin = plugin;
 
@@ -27,65 +27,72 @@ public class Commands extends BukkitCommand {
         Bukkit.getLogger().info("[CommandAlias:Debug] cmd is: " + name);
         Bukkit.getLogger().info("[CommandAlias:Debug] usage is: " + usageMessage);
         Bukkit.getLogger().info("[CommandAlias:Debug] desc is: " + description);
-        Bukkit.getLogger().info("[CommandAlias:Debug] isplayer is: " + playerCommand);
+        Bukkit.getLogger().info("[CommandAlias:Debug] isplayer is: " + cmdtype);
         Bukkit.getLogger().info("[CommandAlias:Debug] permission is: " + this.permission);
 
     }
 
+    public String rPlaceholder(Player p, String s){
+        s = s.replace("{player}", p.getName()); // replace {player} placeholder with players name
+        s = s.replace("{world}", Objects.requireNonNull(p.getLocation().getWorld()).getName());  // replace {world} placeholder with players current world
+        return s;
+    }
+
+    // type = console = only the console can run (no placeholders)
+    // type = player = only a player can run (can have placeholders)
+    // type = both = either console or player can run (no placeholders)
+    // todo: fix permissions
+
     public boolean execute(CommandSender sender, String label, String[] args) {
-        if (sender.hasPermission(this.permission) || this.permission.equals("")) {
-            if (this.playerCommand) {
-                if (sender instanceof Player) {
-                    Player p = (Player) sender;
 
-                    FileConfiguration config = this.plugin.getConfig();
 
-                    for (String s : config.getStringList("cmds." + getName() + ".playercmd")) {
+        // if it can be run by both: no params / player check (console only, no player commands)
+        // if it can be run by console: no params, no player commands
+        // if it can be run by player only: inc params and player commands
 
-                        Bukkit.getLogger().info("command is: " + s);
 
-                        s = s.replace("{player}", p.getName()); // replace {player} placeholder with players name
-                        s = s.replace("{world}", Objects.requireNonNull(p.getLocation().getWorld()).getName());  // replace {world} placeholder with players current world
+        // if it can be run by
+        // check if its run by player or console
+        // if run by player, check they have the perm and its a player/both command
+        // if run by console, check that its a console/both command
 
-                        p.performCommand(s);
-                    }
-                    for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) {
 
-                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
-                    }
-                } else {
+        // if trying to run a console only command as a player or visa versa
+        if(sender instanceof Player && this.cmdtype.equals("console")){
+            // they are a player but running a console only command
+            sender.sendMessage(ChatColor.RED + "You can only run this command from the console.");
+            return true;
+        } else if(!(sender instanceof Player) && this.cmdtype.equals("player")) {
+            // the are not a player but running a player only command
+            sender.sendMessage(ChatColor.RED + "You can only run this command as a player.");
+            return true;
+        }
 
-                    sender.sendMessage(ChatColor.RED + "You are not a player.");
+        // sender is a player, permissions are not null and they don't have the permission
+        if (sender instanceof Player && !this.permission.equals("") && !sender.hasPermission(this.permission)) {
+            sender.sendMessage(ChatColor.RED + "No permission to run this command.");
+            return true;
+        }
+
+        // player only command, runs player and console commands with replace for the placeholders
+        if (this.cmdtype.equals("player")) {
+                Player p = (Player) sender;
+                FileConfiguration config = this.plugin.getConfig(); // load the config
+                for (String s : config.getStringList("cmds." + getName() + ".playercmd")) { // loop through player commands
+                    Bukkit.getLogger().info("command is: " + rPlaceholder(p, s)); // run as a player (and call replace placeholder method)
+                    p.performCommand(rPlaceholder(p, s)); // exec
                 }
-            } else {
-
-                FileConfiguration config = this.plugin.getConfig();
-                if (sender instanceof Player &&
-                        config.getStringList("cmds." + getName() + ".playercmd") != null &&
-                        !config.getStringList("cmds." + getName() + ".playercmd").isEmpty()) {
-
-                    Player p = (Player) sender;
-
-                    for (String s : config.getStringList("cmds." + getName() + ".playercmd")) {
-
-
-                        Bukkit.getLogger().info("command is: " + s);
-
-                        s = s.replace("{player}", p.getName()); // replace {player} placeholder with players name
-                        s = s.replace("{world}", Objects.requireNonNull(p.getLocation().getWorld()).getName());  // replace {world} placeholder with players current world
-
-                        System.out.println(s);
-                        p.performCommand(s);
-                    }
+                for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) { // loop through console commands
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), rPlaceholder(p, s));
                 }
+        }
 
-                for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) {
-
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
-                }
+        // this is a console command ran from a console or player sender
+        if (this.cmdtype.equals("console") || this.cmdtype.equals("both")) {
+            FileConfiguration config = this.plugin.getConfig();
+            for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
             }
-        } else {
-            sender.sendMessage(ChatColor.RED + "No permission.");
         }
         return true;
     }

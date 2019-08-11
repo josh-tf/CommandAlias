@@ -43,7 +43,7 @@ public class CommandAlias extends JavaPlugin {
     						getConfig().getString("cmds." + a + ".usage"),
 							aliascmds, // array of available aliases
     						getConfig().getString("cmds." + a + ".description"),
-    						getConfig().getBoolean("cmds." + a + ".ingame"),
+    						getConfig().getString("cmds." + a + ".cmdtype"),
     						getConfig().getString("cmds." + a + ".permission"),
 							this)
     				);
