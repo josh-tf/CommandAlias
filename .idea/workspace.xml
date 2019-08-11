@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5ef31273-8472-41b3-b77c-063d89945313" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tf/josh/commandalias/cmd/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tf/josh/commandalias/cmd/Commands.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -8,9 +8,7 @@ Development is done in [IntelliJ IDEA](https://www.jetbrains.com/idea/) so the r
 
 ## Usage
 
-```python
-import foobar
-
+```text
 /cmdalias ver # lists the current plugin version
 /cmdalias help # lists a simple helper
 /cmdalias ver # lists alias that you have permission for
