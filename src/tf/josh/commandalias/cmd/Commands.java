@@ -1,6 +1,7 @@
 package tf.josh.commandalias.cmd;
 
 import java.util.List;
+import java.util.Objects;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -40,6 +41,12 @@ public class Commands extends BukkitCommand {
                     FileConfiguration config = this.plugin.getConfig();
 
                     for (String s : config.getStringList("cmds." + getName() + ".playercmd")) {
+
+                        Bukkit.getLogger().info("command is: " + s);
+
+                        s = s.replace("{player}", p.getName()); // replace {player} placeholder with players name
+                        s = s.replace("{world}", Objects.requireNonNull(p.getLocation().getWorld()).getName());  // replace {world} placeholder with players current world
+
                         p.performCommand(s);
                     }
                     for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) {
@@ -58,16 +65,19 @@ public class Commands extends BukkitCommand {
                         !config.getStringList("cmds." + getName() + ".playercmd").isEmpty()) {
 
                     Player p = (Player) sender;
+
                     for (String s : config.getStringList("cmds." + getName() + ".playercmd")) {
+
+
+                        Bukkit.getLogger().info("command is: " + s);
+
+                        s = s.replace("{player}", p.getName()); // replace {player} placeholder with players name
+                        s = s.replace("{world}", Objects.requireNonNull(p.getLocation().getWorld()).getName());  // replace {world} placeholder with players current world
+
                         System.out.println(s);
-                    }
-                    for (String s : config.getStringList("cmds." + getName() + ".playercmd")) {
-
-
                         p.performCommand(s);
                     }
                 }
-
 
                 for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) {
 
