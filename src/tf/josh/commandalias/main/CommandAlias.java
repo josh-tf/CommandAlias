@@ -1,9 +1,14 @@
 package tf.josh.commandalias.main;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import tf.josh.commandalias.cmd.Chat;
 import tf.josh.commandalias.cmd.Commands;
 import org.bukkit.command.Command;
@@ -17,6 +22,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CommandAlias extends JavaPlugin {
 
 	private ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+	private File messageConfigFile;
+	private FileConfiguration messageConfig;
 
     @Override
     public void onEnable() {
@@ -24,6 +31,7 @@ public class CommandAlias extends JavaPlugin {
 
     	getConfig().options().copyDefaults(true);
     	saveDefaultConfig();
+		createMessageConfig();
     	registerCommands();
     	
     }
@@ -50,6 +58,25 @@ public class CommandAlias extends JavaPlugin {
     	}
 		registerCmd("c", new Chat());
     }
+
+		private void createMessageConfig() {
+			messageConfigFile = new File(getDataFolder(), "messages.yml");
+			if (!messageConfigFile.exists()) {
+				messageConfigFile.getParentFile().mkdirs();
+				saveResource("messages.yml", false);
+			}
+
+			messageConfig= new YamlConfiguration();
+			try {
+				messageConfig.load(messageConfigFile);
+			} catch (IOException | InvalidConfigurationException e) {
+				e.printStackTrace();
+			}
+		}
+
+	public FileConfiguration getMessageConfig() {
+		return this.messageConfig;
+	}
     	
     	private void registerCmd(String name, Command cmd) {
     		Field bukkitClassMgr;

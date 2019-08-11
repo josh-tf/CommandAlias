@@ -22,14 +22,6 @@ public class Commands extends BukkitCommand {
         this.cmdtype = cmdtype;
         this.permission = permission;
         this.plugin = plugin;
-
-        Bukkit.getLogger().info("[CommandAlias:Debug] Registering example command: " + name);
-        Bukkit.getLogger().info("[CommandAlias:Debug] cmd is: " + name);
-        Bukkit.getLogger().info("[CommandAlias:Debug] usage is: " + usageMessage);
-        Bukkit.getLogger().info("[CommandAlias:Debug] desc is: " + description);
-        Bukkit.getLogger().info("[CommandAlias:Debug] isplayer is: " + cmdtype);
-        Bukkit.getLogger().info("[CommandAlias:Debug] permission is: " + this.permission);
-
     }
 
     public String rPlaceholder(Player p, String s){
@@ -38,24 +30,7 @@ public class Commands extends BukkitCommand {
         return s;
     }
 
-    // type = console = only the console can run (no placeholders)
-    // type = player = only a player can run (can have placeholders)
-    // type = both = either console or player can run (no placeholders)
-    // todo: fix permissions
-
     public boolean execute(CommandSender sender, String label, String[] args) {
-
-
-        // if it can be run by both: no params / player check (console only, no player commands)
-        // if it can be run by console: no params, no player commands
-        // if it can be run by player only: inc params and player commands
-
-
-        // if it can be run by
-        // check if its run by player or console
-        // if run by player, check they have the perm and its a player/both command
-        // if run by console, check that its a console/both command
-
 
         // if trying to run a console only command as a player or visa versa
         if(sender instanceof Player && this.cmdtype.equals("console")){
@@ -79,7 +54,6 @@ public class Commands extends BukkitCommand {
                 Player p = (Player) sender;
                 FileConfiguration config = this.plugin.getConfig(); // load the config
                 for (String s : config.getStringList("cmds." + getName() + ".playercmd")) { // loop through player commands
-                    Bukkit.getLogger().info("command is: " + rPlaceholder(p, s)); // run as a player (and call replace placeholder method)
                     p.performCommand(rPlaceholder(p, s)); // exec
                 }
                 for (String s : config.getStringList("cmds." + getName() + ".consolecmd")) { // loop through console commands
