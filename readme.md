@@ -1,3 +1,4 @@
+
 # CommandAlias
 
 CommandAlias is a small Spigot/Bukkit/PaperMC plugin for mapping multiple commands to a single command. Supports player and console commands, permissions and placeholders.
@@ -8,7 +9,7 @@ Development is done in [IntelliJ IDEA](https://www.jetbrains.com/idea/) so the r
 
 ## Usage
 
-```text
+```sql
 /cmdalias ver # lists the current plugin version
 /cmdalias help # lists a simple helper
 /cmdalias ver # lists alias that you have permission for
