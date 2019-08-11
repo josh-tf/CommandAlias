@@ -13,7 +13,12 @@
 
 cmds:
   starter:
+    usage: /starter
+    description: Gives the player starter items and charges them $10
     ingame: true # if false then this can only be run via console
+    permission: "commandalias.starter" # you can put anything here
+    aliases: 
+    - starterkit
     playercmd: 
     - warp starter # warp to the starter area
     - c I just claimed my starter kit # c is the bukkit command for chat 
@@ -24,11 +29,4 @@ cmds:
      - item {player} sshovel 1 # give 1x stone shovel
      - item {player} saxe 1 # give 1x stone axe
      - item {player} shoe 1 # give 1x stone hoe
-    description: Gives the player starter items and charges them $10
-    aliases: 
-    - starterkit
-    usage: /starter
-    permission: "commandalias.starter" # you can put anything here
-
-     
  
