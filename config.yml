@@ -10,8 +10,8 @@
 # {player} - the players name 
 # {world} - the world the command was ran from
 #
-    
-commands:
+
+cmds:
   starter:
     ingame: true # if false then this can only be run via console
     playercmd: 
