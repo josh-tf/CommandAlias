@@ -7,15 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ef31273-8472-41b3-b77c-063d89945313" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/CommandAlias_jar/CommandAlias.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tf/josh/commandalias/cmd/Commands.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CommandAlias.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CommandAlias.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tf/josh/commandalias/cmd/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tf/josh/commandalias/cmd/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tf/josh/commandalias/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tf/josh/commandalias/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CommandAlias_jar/CommandAlias.jar" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +48,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bukkit-1.14.4-R0.1-20190803.025913-27-javadoc.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
