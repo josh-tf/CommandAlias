@@ -1,11 +1,5 @@
-main: tf.josh.CommandAlias.Main
+main: tf.josh.commandalias.Main
 name: CommandAlias
 version: 1.0
 author: Josh Bowden (josh.tf)
 description: A plugin for mapping alias comamand to multiple actions
-commands:
-    commandalias:
-    description: Default command which shows current version
-    usage: /commandalias
-    permission: commandalias.about
-    permission-message: You don't have the commandalias.about permission.

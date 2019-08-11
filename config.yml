@@ -1,0 +1,34 @@
+#####################################################
+##           CommandAlias Configuration           ###
+##    https://github.com/josh-tf/CommandAlias     ###
+#####################################################
+#
+# Remember to use spaces and not tabs (yaml is picky)
+#
+# Available Placeholders
+#
+# {player} - the players name 
+# {world} - the world the command was ran from
+#
+    
+commands:
+  starter:
+    ingame: true # if false then this can only be run via console
+    playercmd: 
+    - warp starter # warp to the starter area
+    - c I just claimed my starter kit # c is the bukkit command for chat 
+    consolecmd:
+     - eco take 10 {player} 1 # take $10 from the players balance
+     - item {player} ssword 1 # give 1x stone sword
+     - item {player} spaxe 1 # give 1x stone pickaxe
+     - item {player} sshovel 1 # give 1x stone shovel
+     - item {player} saxe 1 # give 1x stone axe
+     - item {player} shoe 1 # give 1x stone hoe
+    description: Gives the player starter items and charges them $10
+    aliases: 
+    - starterkit
+    usage: /starter
+    permission: "commandalias.starter" # you can put anything here
+
+     
+ 
