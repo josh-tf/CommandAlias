@@ -14,7 +14,7 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public class CommandAlias extends JavaPlugin {
 
 	private ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
@@ -40,11 +40,12 @@ public class Main extends JavaPlugin {
 
     		registerCmd(a,
     				new Commands(a,
-    						getConfig().getString("commands." + a + ".usage"),
+    						getConfig().getString("cmds." + a + ".usage"),
 							aliascmds, // array of available aliases
-    						getConfig().getString("commands." + a + ".description"), 
-    						getConfig().getBoolean("commands." + a + ".ingame"), 
-    						getConfig().getString("commands." + a + ".permission"), this)
+    						getConfig().getString("cmds." + a + ".description"),
+    						getConfig().getBoolean("cmds." + a + ".ingame"),
+    						getConfig().getString("cmds." + a + ".permission"),
+							this)
     				);
     	}
 		registerCmd("c", new Chat());

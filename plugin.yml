@@ -1,4 +1,4 @@
-main: tf.josh.commandalias.Main
+main: tf.josh.commandalias.main.CommandAlias
 name: CommandAlias
 version: 1.0
 author: Josh Bowden (josh.tf)
